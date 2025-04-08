@@ -9,7 +9,9 @@ license = "MIT/Apache-2.0"
 keywords = ["crypto", "cryptography", "vrf", "signature", "privacy"]
 
 [dependencies]
-dleq_vrf = { version = "0.0.2", default-features = false, path = "../dleq_vrf", features = [ "scale" ] }
+dleq_vrf = { version = "0.0.2", default-features = false, path = "../dleq_vrf", features = [
+  "scale",
+] }
 
 rand_core.workspace = true
 zeroize.workspace = true
@@ -19,14 +21,16 @@ ark-ff.workspace = true
 ark-ec.workspace = true
 ark-serialize.workspace = true
 
-fflonk = { git = "https://github.com/w3f/fflonk" }
-ring = { git = "https://github.com/w3f/ring-proof" }
+fflonk = { git = "https://github.com/w3f/fflonk", rev = "be95d4c971b1d15b5badfc06ff13f5c07987d484" }
+ring = { git = "https://github.com/vampik33/ring-proof", branch = "fflonk-fix" }
 
 merlin = { version = "3.0", default-features = false }
 
 # In these three, add optional = true here only if we create some related curves trait.
 ark-ed-on-bls12-381-bandersnatch = { version = "0.4", default-features = false }
-ark-bls12-381 = { version = "0.4", default-features = false, features = [ "curve" ] } # implies scalar_field
+ark-bls12-381 = { version = "0.4", default-features = false, features = [
+  "curve",
+] } # implies scalar_field
 sha2 = { version = "0.10", default-features = false }
 rand_chacha = { version = "0.3.1", default-features = false }
 
@@ -50,8 +54,5 @@ getrandom = ["dleq_vrf/getrandom"] # "ring/getrandom"]
 print-trace = ["ark-std/print-trace"]
 # Substrate curves allows to offload computationally heavy tasks to Substrate host functions.
 # Mostly useful in Substrate development context when targeting wasm32 architecture.
-substrate-curves = [
-  "sp-ark-ed-on-bls12-381-bandersnatch",
-  "sp-ark-bls12-381",
-]
+substrate-curves = ["sp-ark-ed-on-bls12-381-bandersnatch", "sp-ark-bls12-381"]
 # parallel = ["std", "ring/parallel"]  #  ["std", "rayon", "ark-std/parallel", "ark-ff/parallel", "ark-ec/parallel", "ark-poly/parallel"]
